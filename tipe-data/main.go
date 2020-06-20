@@ -67,4 +67,13 @@ func main() {
 
 	fmt.Println(zeroValueInt) // 0
 	fmt.Println(nilaiNil)     // <nil>
+
+	/*
+	* Konstanta
+	* tipe variable yang nilainya tidak bisa dirubah setelah dideklarasikan
+	 */
+	const phi float32 = 3.14
+	const phiDikali2 = 6.28
+
+	fmt.Println(phi, phiDikali2) // 3.14 6.28
 }
