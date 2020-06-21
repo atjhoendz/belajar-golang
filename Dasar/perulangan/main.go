@@ -63,4 +63,18 @@ outerLoop:
 			fmt.Printf("matriks [%d][%d]\n", i, j)
 		}
 	}
+
+	/*
+	* for range
+	*
+	* for i, name := range names
+	* for _, name := range names (jika indeks tidak dibutuhkan)
+	* for i, _ := range names (jika value tidak dibutuhkan)
+	* for i := range names (jika value tidak dibutuhkan)
+	 */
+	var names = [...]string{"mohamad", "achun", "armando"}
+
+	for i, name := range names {
+		fmt.Printf("Element ke %d: %s\n", i, name)
+	}
 }
