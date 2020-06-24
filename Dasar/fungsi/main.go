@@ -63,6 +63,71 @@ func main() {
 	// penggunaan fungsi yourHobbies
 	myHobbies := []string{"ngoding", "workout", "eat"}
 	yourHobbies("Achun", myHobbies...)
+
+	/*
+	 * fungsi closure
+	 * sebuah fungsi yang dimasukan kedalam variable
+	 *
+	 * dapat digunakan untuk membuat fungsi didalam fungsi
+	 * membuat fungsi mengembalikan fungsi
+	 *
+	 * ditempatkan didalam fungsi
+	 */
+
+	getMinMax := func(n []int) (min int, max int) {
+		for i, e := range n {
+			switch {
+			case i == 0:
+				min, max = e, e
+			case e > max:
+				max = e
+			case e < min:
+				min = e
+			}
+		}
+
+		return
+	}
+
+	numbers := []int{3, 4, 5, 7, 1, 5, 8, 4, 9, 0}
+	min, max := getMinMax(numbers)
+
+	fmt.Printf("Daftar Angka: %v\n", numbers)
+	fmt.Printf("Angka terkecil: %d\n", min)
+	fmt.Printf("Angka terbesar: %d\n", max)
+
+	/*
+	 * immediately-invoked function expression (IIFE)
+	 * fungsi yang langsund dipanggil setelah dideklarasikan
+	 */
+	dataNumbers := []int{1, 4, 6, 3, 7, 4, 7, 9, 0, 5, 2, 6, 7}
+
+	filteredNumbers := func(min int) []int {
+		var result []int
+
+		for _, v := range dataNumbers {
+			if v < min {
+				continue
+			}
+			result = append(result, v)
+		}
+
+		return result
+	}(4) // memasukan argument (4) diakhir fungsi
+
+	fmt.Println("\nNumbers:", numbers)
+	fmt.Println("Filtered Numbers:", filteredNumbers)
+
+	// penggunaan fungsi closure sebagai return value pada fungsi findMax()
+	newMax := 5
+	anotherNumbers := []int{4, 2, 5, 6, 7, 3, 5, 0, 8, 4, 6}
+	totalNumber, newFilteredNumbers := findMax(anotherNumbers, newMax)
+
+	fmt.Println("\nNumbers:", anotherNumbers)
+	fmt.Println("Max:", newMax)
+
+	fmt.Println("Total Result:", totalNumber)
+	fmt.Println("Filtered Numbers:", newFilteredNumbers())
 }
 
 /*
@@ -153,10 +218,27 @@ func hitungRataRata(numbers ...int) float64 {
 	return avg
 }
 
-// penggabungan fungsi dengen parameter biasa & variadic
+// penggabungan fungsi dengan parameter biasa & variadic
 func yourHobbies(name string, hobbies ...string) {
 	hobbiesAsString := strings.Join(hobbies, " ")
 
 	fmt.Printf("Your Name: %s\n", name)
 	fmt.Printf("Your Hobbies: %s\n", hobbiesAsString)
+}
+
+/*
+ * fungsi closure sebagai return value
+ */
+func findMax(numbers []int, max int) (int, func() []int) {
+	res := []int{}
+
+	for _, v := range numbers {
+		if v <= max {
+			res = append(res, v)
+		}
+	}
+
+	return len(res), func() []int {
+		return res
+	}
 }
