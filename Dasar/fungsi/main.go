@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"math/rand"
 	"strings"
 	"time"
@@ -31,6 +32,19 @@ func main() {
 	divideNumber(10, 2)
 	divideNumber(1, 0)
 	divideNumber(16, -4)
+
+	// penggunaan fungsi calculate
+	var diameter float64 = 15
+	area, circumference := calculate(diameter)
+
+	fmt.Printf("Luas Lingkaran \t\t: %.2f\n", area)
+	fmt.Printf("Keliling Lingkaran \t: %.2f\n", circumference)
+
+	// penggunaan fungsi calculate2
+	area2, cicircumference2 := calculate2(diameter)
+
+	fmt.Printf("Luas lingkaran \t\t: %.2f\n", area2)
+	fmt.Printf("Keliling lingkaran \t: %.2f\n", cicircumference2)
 }
 
 /*
@@ -73,4 +87,31 @@ func divideNumber(number1, number2 int) {
 
 	result := number1 / number2
 	fmt.Printf("Hasil %d/%d = %d\n", number1, number2, result)
+}
+
+/*
+ * fungsi multiple return value
+ *
+ * func namaFungsi(parameter) (output1, output2)
+ */
+
+func calculate(d float64) (float64, float64) {
+	area := math.Pi * math.Pow(d/2, 2)
+
+	circumference := math.Pi * d
+
+	return area, circumference
+}
+
+/*
+ * predefined return value
+ *
+ * func namaFungsi(varParam tipedataParam)(varReturn1 tipedataReturn1, varReturn2 tipedataReturn2)
+ */
+func calculate2(d float64) (area float64, circumference float64) {
+	area = math.Pi * math.Pow(d/2, 2)
+
+	circumference = math.Pi * d
+
+	return
 }
