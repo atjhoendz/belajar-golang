@@ -128,6 +128,22 @@ func main() {
 
 	fmt.Println("Total Result:", totalNumber)
 	fmt.Println("Filtered Numbers:", newFilteredNumbers())
+
+	// penggunaan fungsi closure sebagai parameter pada fungsi filter()
+	data := []string{"Mohamad", "Achun", "Armando"}
+
+	dataContainsH := filter(data, func(each string) bool {
+		return strings.Contains(each, "h")
+	})
+
+	dataLength5 := filter(data, func(each string) bool {
+		return len(each) == 5
+	})
+
+	fmt.Println()
+	fmt.Println("Data:", data)
+	fmt.Println("Data dengan huruf h:", dataContainsH)
+	fmt.Println("Data dengan panjang 5:", dataLength5)
 }
 
 /*
@@ -242,3 +258,34 @@ func findMax(numbers []int, max int) (int, func() []int) {
 		return res
 	}
 }
+
+/*
+ * fungsi closure sebagai parameter
+ * atau bisa disebut fungsi callback
+ *
+ * fungsi filter ini akan mengecek data berdasarkan fungsi yang ada didalam fungsi callback
+ */
+func filter(data []string, callback func(string) bool) []string {
+	var result []string
+
+	for _, each := range data {
+		// memanggil fungsi callback untuk mengecek setiap data yang ada
+		if filtered := callback(each); filtered { // assign value filtered dari hasil callback, kemudia cek apakah true/false
+			result = append(result, each)
+		}
+	}
+	return result
+}
+
+/*
+ * alias pada fungsi closure
+ *
+ * type
+ *
+ * type namaAlias func(tipedata) tipeData
+ *
+ * penggunaan
+ * type FilterCallback func(string) bool
+ *
+ * func filter(data []string, callback FilterCallback) []string {}
+ */
