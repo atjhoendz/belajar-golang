@@ -18,7 +18,7 @@ func main() {
 
 	// penggunaan fungsi randomNumber
 
-	// untuk membuat fungsi rand benar-benar acak berdasarkan unix time
+	// -> untuk membuat fungsi rand benar-benar acak berdasarkan unix time
 	rand.Seed(time.Now().Unix())
 
 	randomValue := randomWithRange(3, 10)
@@ -45,6 +45,24 @@ func main() {
 
 	fmt.Printf("Luas lingkaran \t\t: %.2f\n", area2)
 	fmt.Printf("Keliling lingkaran \t: %.2f\n", cicircumference2)
+
+	// penggunaan fungsi rata-rata
+	rataRata := hitungRataRata(9, 10, 5, 6, 9, 3, 6, 7, 8, 5)
+
+	// -> sprintf() digunakan untuk konversi menjadi string, harus dimasukkan kedalam variable
+	msg := fmt.Sprintf("Hasil rata-rata: %.2f", rataRata)
+
+	fmt.Println(msg)
+
+	// mengisi parameter fungsi variadic menggunakan slice
+	nilai := []int{10, 3, 6, 9, 10, 6, 8, 5, 6, 7}
+
+	// -> menggunakan ... disebelah kanan variable (variable...)
+	rataRata = hitungRataRata(nilai...)
+
+	// penggunaan fungsi yourHobbies
+	myHobbies := []string{"ngoding", "workout", "eat"}
+	yourHobbies("Achun", myHobbies...)
 }
 
 /*
@@ -114,4 +132,31 @@ func calculate2(d float64) (area float64, circumference float64) {
 	circumference = math.Pi * d
 
 	return
+}
+
+/*
+ * fungsi variadic
+ * merupakan fungsi dengan argumen yang tidak terbatas yang tipe datanya sama
+ * yang dimasukkan hanya kepada 1 variable dalam 1 parameter
+ *
+ * func namaFungsi(variable ...tipedata)
+ */
+func hitungRataRata(numbers ...int) float64 {
+	total := 0
+	for _, number := range numbers {
+		total += number
+	}
+
+	// float64(variable) digunakan untuk mengcasting tipe data menjadi float64
+	avg := float64(total) / float64(len(numbers))
+
+	return avg
+}
+
+// penggabungan fungsi dengen parameter biasa & variadic
+func yourHobbies(name string, hobbies ...string) {
+	hobbiesAsString := strings.Join(hobbies, " ")
+
+	fmt.Printf("Your Name: %s\n", name)
+	fmt.Printf("Your Hobbies: %s\n", hobbiesAsString)
 }
