@@ -1,0 +1,11 @@
+body {
+  background-color: gray;
+  color: white;
+}
+
+h1 {
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 4px 4px black;
+  font-size: 8rem;
+}
